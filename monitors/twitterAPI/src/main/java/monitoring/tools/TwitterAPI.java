@@ -10,6 +10,7 @@ import java.util.TimerTask;
 import org.apache.log4j.Logger;
 
 import kafka.javaapi.producer.Producer;
+import monitoring.file.FileMonitoredData;
 import monitoring.kafka.KafkaCommunication;
 import monitoring.model.MonitoringData;
 import monitoring.model.MonitoringParams;
@@ -193,8 +194,13 @@ public class TwitterAPI implements ToolInterface {
 			data.add(dataObj);
 		}
 		tweetInfo = new ArrayList<>();
-		KafkaCommunication.generateResponse(data, searchTimeStamp, producer, id, configurationId, confParams.getKafkaTopic());
-		logger.debug("Data successfully sent to Kafka endpoint");
+		
+		//Not using kafka communication for retrieving monitored data;
+		//instead, data is stored in a specific file with the same format
+		/*KafkaCommunication.generateResponse(data, searchTimeStamp, producer, id, configurationId, confParams.getKafkaTopic());
+		logger.debug("Data successfully sent to Kafka endpoint");*/
+		FileMonitoredData.generateResponse(data, searchTimeStamp, id, configurationId);
+		
 		++id;
 		
 	}

@@ -24,9 +24,7 @@ import monitoring.model.MonitoringParams;
 @Path("configuration")
 @Singleton
 public class ToolDispatcher {
-	
-	final static Logger logger = Logger.getLogger(ToolDispatcher.class);
-	
+		
 	//Fake configuration id for testing purposes
 	private int confId = 1;
 	private final String packageRoute = "monitoring.tools.";
